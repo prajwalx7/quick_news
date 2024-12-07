@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:quick_news/pages/Home%20Page/Widgets/app_bar.dart';
-import 'package:quick_news/pages/Home%20Page/Widgets/custom_bottom_bar.dart';
 import 'package:quick_news/pages/Home%20Page/Widgets/filter_list.dart';
 import 'package:quick_news/pages/Home%20Page/Widgets/news_container.dart';
 
@@ -19,9 +18,6 @@ class HomePage extends StatelessWidget {
           FilterList(),
           SizedBox(height: 20),
           NewsContainer(),
-          Spacer(),
-          CustomBottomBar(),
-          SizedBox(height: 10),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:quick_news/pages/Home%20Page/Widgets/author_widget.dart';
 
 class NewsContainer extends StatelessWidget {
@@ -48,15 +49,15 @@ class NewsContainer extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () {},
-                    icon: const Icon(Icons.thumb_up_alt_outlined),
+                    icon: const Icon(Iconsax.like_1),
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: const Icon(Icons.bookmark_outline),
+                    icon: const Icon(Iconsax.bookmark),
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: const Icon(Icons.share_outlined),
+                    icon: const Icon(Iconsax.share),
                   ),
                 ],
               ),

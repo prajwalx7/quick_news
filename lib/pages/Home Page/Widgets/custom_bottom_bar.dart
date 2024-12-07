@@ -1,24 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
-class CustomBottomBar extends StatelessWidget {
-  const CustomBottomBar({super.key});
+class CustomBottomBar extends StatefulWidget {
+  final int currentIndex;
+  final Function(int) onTap;
 
+  const CustomBottomBar(
+      {super.key, required this.currentIndex, required this.onTap});
+
+  @override
+  State<CustomBottomBar> createState() => _CustomBottomBarState();
+}
+
+class _CustomBottomBarState extends State<CustomBottomBar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 100.0),
+      padding: const EdgeInsets.symmetric(horizontal: 80.0),
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 2),
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(42)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.home_outlined),
-            SizedBox(width: 20),
-            Icon(Icons.search_outlined),
-            SizedBox(width: 20),
-            Icon(Icons.bookmark_outline),
+            IconButton(
+              icon: const Icon(Iconsax.home),
+              onPressed: () => widget.onTap(0),
+            ),
+            const SizedBox(width: 20),
+            IconButton(
+              icon: const Icon(Iconsax.search_normal),
+              onPressed: () => widget.onTap(1),
+            ),
+            const SizedBox(width: 20),
+            IconButton(
+              icon: const Icon(Iconsax.bookmark),
+              onPressed: () => widget.onTap(2),
+            ),
           ],
         ),
       ),
@@ -26,9 +45,13 @@ class CustomBottomBar extends StatelessWidget {
   }
 }
 
-Widget buildIcon(IconData icon) {
+Widget buildIcon(IconData icon, VoidCallback onTap) {
   return Container(
-    decoration: BoxDecoration(color: Colors.grey),
-    child: Icon(icon),
+    padding: EdgeInsets.all(6),
+    decoration: const BoxDecoration(color: Color(0xff393939)),
+    child: IconButton(
+      icon: Icon(icon),
+      onPressed: onTap,
+    ),
   );
 }

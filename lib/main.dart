@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quick_news/pages/Home%20Page/Pages/home_page.dart';
+import 'package:quick_news/navigation_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,9 +10,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: NavigationPage(),
     );
   }
 }
