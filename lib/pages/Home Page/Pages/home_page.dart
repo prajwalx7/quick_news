@@ -12,11 +12,10 @@ class HomePage extends StatelessWidget {
       backgroundColor: Color(0xff0C0C0C),
       body: Column(
         children: [
-          SizedBox(height: 35),
+          SizedBox(height: 40),
           CustomAppBar(),
           SizedBox(height: 20),
           FilterList(),
-          SizedBox(height: 20),
           NewsContainer(),
         ],
       ),

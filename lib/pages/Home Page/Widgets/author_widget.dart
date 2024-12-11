@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 class AuthorWidget extends StatelessWidget {
-  const AuthorWidget({super.key});
+  final String author;
+  const AuthorWidget({super.key,required this.author});
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +18,13 @@ class AuthorWidget extends StatelessWidget {
           child: const Icon(Iconsax.user),
         ),
         const SizedBox(width: 12),
-        const Column(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Published by'),
+            const Text('Published by'),
             Text(
-              'Jim Hook',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              author,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ],
         ),
