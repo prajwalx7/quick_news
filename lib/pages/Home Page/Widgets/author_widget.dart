@@ -3,7 +3,7 @@ import 'package:iconsax/iconsax.dart';
 
 class AuthorWidget extends StatelessWidget {
   final String author;
-  const AuthorWidget({super.key,required this.author});
+  const AuthorWidget({super.key, required this.author});
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +18,21 @@ class AuthorWidget extends StatelessWidget {
           child: const Icon(Iconsax.user),
         ),
         const SizedBox(width: 12),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('Published by'),
-            Text(
-              author,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('Published by'),
+              Text(
+                author,
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
+            ],
+          ),
         ),
-        const Spacer(),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
