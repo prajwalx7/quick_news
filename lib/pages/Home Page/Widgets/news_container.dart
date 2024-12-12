@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:lottie/lottie.dart';
 import 'package:quick_news/pages/Home%20Page/Widgets/author_widget.dart';
 import 'package:quick_news/services/news_service.dart';
 
@@ -11,13 +11,42 @@ class NewsContainer extends StatefulWidget {
   State<NewsContainer> createState() => _NewsContainerState();
 }
 
-class _NewsContainerState extends State<NewsContainer> {
+class _NewsContainerState extends State<NewsContainer>
+    with TickerProviderStateMixin {
+  late AnimationController _likeController;
+  late AnimationController _bookmarkController;
+  late AnimationController _shareController;
+
   late Future<List<dynamic>> _newsArticles;
+  bool isLiked = false;
+  bool isBookmarked = false;
+  final List<Color> _colors = const [
+    Color(0xffFEF3E2),
+    Color(0xffE0FBE2),
+    Color(0xffD4F6FF),
+    Color(0xffF6EFBD),
+    Color(0xffE7F0DC),
+    Color(0xffF5DAD2),
+  ];
 
   @override
   void initState() {
     super.initState();
     _newsArticles = NewsService.fetchNews();
+    _likeController =
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
+    _bookmarkController =
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
+    _shareController =
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
+  }
+
+  @override
+  void dispose() {
+    _likeController.dispose();
+    _bookmarkController.dispose();
+    _shareController.dispose();
+    super.dispose();
   }
 
   @override
@@ -39,12 +68,13 @@ class _NewsContainerState extends State<NewsContainer> {
                 cardsCount: news.length,
                 cardBuilder: (context, index, _, __) {
                   final article = news[index];
+                  final containerColor = _colors[index % _colors.length];
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Container(
                       padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
-                        color: const Color(0xffFFF2C5),
+                        color: containerColor,
                         borderRadius: BorderRadius.circular(18),
                         // border: Border.all(color: Colors.black12, width: 1),
                       ),
@@ -92,16 +122,48 @@ class _NewsContainerState extends State<NewsContainer> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(Iconsax.like_1),
+                                  onPressed: () {
+                                    _likeController
+                                        .forward()
+                                        .then((_) => _likeController.reverse());
+                                  },
+                                  icon: Lottie.asset(
+                                    'assets/animations/like.json',
+                                    
+                                    height: 30,
+                                    width: 30,
+                                    controller: _likeController,
+                                    repeat: false,
+                                    animate: true,
+                                  ),
                                 ),
                                 IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(Iconsax.bookmark),
+                                  onPressed: () {
+                                    _bookmarkController.forward().then(
+                                        (_) => _bookmarkController.reverse());
+                                  },
+                                  icon: Lottie.asset(
+                                    'assets/animations/bookmark.json',
+                                    height: 30,
+                                    width: 30,
+                                    controller: _bookmarkController,
+                                    repeat: false,
+                                    animate: true,
+                                  ),
                                 ),
                                 IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(Iconsax.share),
+                                  onPressed: () {
+                                    _shareController.forward().then(
+                                        (_) => _shareController.reverse());
+                                  },
+                                  icon: Lottie.asset(
+                                    'assets/animations/share.json',
+                                    height: 30,
+                                    width: 30,
+                                    controller: _shareController,
+                                    repeat: false,
+                                    animate: true,
+                                  ),
                                 ),
                               ],
                             ),
