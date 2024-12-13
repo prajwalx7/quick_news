@@ -28,6 +28,9 @@ class NewsService {
           article['publishedAt'] = formatter.format(publishedAt);
         }
 
+        article['content'] ??= "No content available";
+        article['urlToImage'] ??= "https://via.placeholder.com/150";
+
         return article;
       }).toList();
 

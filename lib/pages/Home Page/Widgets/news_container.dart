@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+import 'package:quick_news/pages/Details%20Page/detail_page.dart';
 import 'package:quick_news/pages/Home%20Page/Widgets/author_widget.dart';
 import 'package:quick_news/pages/Home%20Page/Widgets/icons_widget.dart';
 import 'package:quick_news/services/news_service.dart';
@@ -58,9 +59,17 @@ class _NewsContainerState extends State<NewsContainer> {
               color: Colors.white,
             ));
           } else if (snapshot.hasError) {
-            return const Center(child: Text("Error loading news"));
+            return const Center(
+                child: Text(
+              "Error loading news",
+              style: TextStyle(color: Colors.white),
+            ));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text("No news found"));
+            return const Center(
+                child: Text(
+              "No news found",
+              style: TextStyle(color: Colors.white),
+            ));
           } else {
             final news = snapshot.data!;
             return CardSwiper(
@@ -68,50 +77,61 @@ class _NewsContainerState extends State<NewsContainer> {
               cardBuilder: (context, index, _, __) {
                 final article = news[index];
                 final containerColor = _colors[index % _colors.length];
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Container(
-                    padding: const EdgeInsets.all(14),
-                    decoration: BoxDecoration(
-                      color: containerColor,
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    child: Stack(
-                      children: [
-                        SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                article['title'] ?? "No Title",
-                                style: const TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  overflow: TextOverflow.ellipsis,
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => DetailPage(
+                                  article: article,
+                                  backgroundColor: containerColor,
+                                )));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Container(
+                      padding: const EdgeInsets.all(14),
+                      decoration: BoxDecoration(
+                        color: containerColor,
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                      child: Stack(
+                        children: [
+                          SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  article['title'] ?? "No Title",
+                                  style: const TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  maxLines: 3,
                                 ),
-                                maxLines: 3,
-                              ),
-                              const SizedBox(height: 10),
-                              Text(article['publishedAt'] ?? "No Date"),
-                              const SizedBox(height: 12),
-                              AuthorWidget(
-                                author: article['author'] ?? "No Author",
-                              ),
-                              const SizedBox(height: 15),
-                              Text(
-                                article['description'] ?? "No Description",
-                                style: const TextStyle(fontSize: 22),
-                                textAlign: TextAlign.justify,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 7,
-                              ),
-                              const SizedBox(height: 20),
-                            ],
+                                const SizedBox(height: 10),
+                                Text(article['publishedAt'] ?? "No Date"),
+                                const SizedBox(height: 12),
+                                AuthorWidget(
+                                  author: article['author'] ?? "No Author",
+                                ),
+                                const SizedBox(height: 15),
+                                Text(
+                                  article['description'] ?? "No Description",
+                                  style: const TextStyle(fontSize: 22),
+                                  textAlign: TextAlign.justify,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 7,
+                                ),
+                                const SizedBox(height: 20),
+                              ],
+                            ),
                           ),
-                        ),
-                        const IconsWidget(),
-                      ],
+                          const IconsWidget(),
+                        ],
+                      ),
                     ),
                   ),
                 );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quick_news/navigation_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
