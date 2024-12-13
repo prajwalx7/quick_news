@@ -6,19 +6,12 @@ import 'package:url_launcher/url_launcher.dart';
 class DetailPage extends StatelessWidget {
   final Map<String, dynamic> article;
   final Color backgroundColor;
-  const DetailPage(
-      {super.key, required this.article, required this.backgroundColor});
+  DetailPage({super.key, required this.article, required this.backgroundColor});
 
   Future<void> _launchUrl(String url) async {
     final uri = Uri.parse(url);
-    try {
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri, mode: LaunchMode.externalApplication);
-      } else {
-        throw 'Could not launch $url';
-      }
-    } catch (e) {
-      debugPrint('Error launching URL: $e');
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $uri');
     }
   }
 
@@ -44,7 +37,7 @@ class DetailPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 Text(
-                  article['title'],
+                  article['title'] ?? "Not available",
                   style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
@@ -57,7 +50,7 @@ class DetailPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 AuthorWidget(
-                  author: article['author'],
+                  author: article['author'] ?? "Not available",
                 ),
                 const SizedBox(height: 30),
                 Text(
@@ -76,7 +69,7 @@ class DetailPage extends StatelessWidget {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: TextButton(
-                    onPressed: () => _launchUrl(article['url'] ?? ''),
+                    onPressed: () => _launchUrl(article['url']),
                     child: const Text(
                       'Read Full Article',
                       style: TextStyle(

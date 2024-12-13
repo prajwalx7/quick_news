@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 class AuthorWidget extends StatelessWidget {
-  final String author;
+  final String? author;
   const AuthorWidget({super.key, required this.author});
 
   @override
   Widget build(BuildContext context) {
+    final String displayAuthor =
+        (author?.isNotEmpty ?? false) ? author! : "Unknown Author";
     return Row(
       children: [
         Container(
@@ -24,7 +26,7 @@ class AuthorWidget extends StatelessWidget {
             children: [
               const Text('Published by'),
               Text(
-                author,
+                displayAuthor,
                 style:
                     const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 overflow: TextOverflow.ellipsis,
