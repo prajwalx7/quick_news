@@ -49,6 +49,7 @@ class _NewsPageState extends State<NewsPage> {
                     filter,
                     style: TextStyle(
                         color: isSelected ? Colors.white : Colors.white30,
+                        fontFamily: 'Prompt',
                         fontSize: 22,
                         fontWeight:
                             isSelected ? FontWeight.bold : FontWeight.normal),

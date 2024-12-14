@@ -22,11 +22,16 @@ class CustomAppBar extends StatelessWidget {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 38,
+                        fontFamily: 'Prompt',
                         color: Colors.white),
                   ),
                   TextSpan(
                     text: "News",
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontFamily: 'Prompt',
+                    ),
                   ),
                 ],
               ),
@@ -35,7 +40,7 @@ class CustomAppBar extends StatelessWidget {
             IconButton(
               onPressed: () {},
               icon: const Icon(
-                Iconsax.menu,
+                Iconsax.notification,
                 color: Colors.white,
               ),
             ),

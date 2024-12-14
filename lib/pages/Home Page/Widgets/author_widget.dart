@@ -13,7 +13,8 @@ class AuthorWidget extends StatelessWidget {
       children: [
         Container(
           padding: const EdgeInsets.all(8),
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.black),
             color: Colors.white,
             shape: BoxShape.circle,
           ),
@@ -24,11 +25,16 @@ class AuthorWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Published by'),
+              const Text(
+                'Published by',
+                style: TextStyle(fontFamily: 'Prompt'),
+              ),
               Text(
                 displayAuthor,
-                style:
-                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Prompt'),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
               ),
@@ -38,11 +44,16 @@ class AuthorWidget extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
-              color: Colors.black, borderRadius: BorderRadius.circular(18)),
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(18),
+          ),
           child: const Text(
             'Follow',
             style: TextStyle(
-                color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Prompt'),
           ),
         ),
       ],

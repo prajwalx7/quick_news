@@ -26,8 +26,8 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             buildIcon(Iconsax.home, 0, widget.currentIndex),
-            buildIcon(Iconsax.search_normal, 1, widget.currentIndex),
-            buildIcon(Iconsax.bookmark, 2, widget.currentIndex),
+            buildIcon(Iconsax.bookmark, 1, widget.currentIndex),
+            buildIcon(Iconsax.user, 2, widget.currentIndex),
           ],
         ),
       ),

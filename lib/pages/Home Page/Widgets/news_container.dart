@@ -18,12 +18,11 @@ class _NewsContainerState extends State<NewsContainer> {
   late Future<List<dynamic>> _newsArticles;
 
   final List<Color> _colors = const [
-    Color(0xffFEF3E2),
-    Color(0xffE0FBE2),
-    Color(0xffD4F6FF),
-    Color(0xffF6EFBD),
-    Color(0xffE7F0DC),
-    Color(0xffF5DAD2),
+    Color(0xffFFE8E5),
+    Color(0xffFFF2C5),
+    Color(0xffE0F1FF),
+    Color(0xffEDE5FF),
+    Color(0xffE5FFD3),
   ];
 
   @override
@@ -80,20 +79,22 @@ class _NewsContainerState extends State<NewsContainer> {
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => DetailPage(
-                                  article: article,
-                                  backgroundColor: containerColor,
-                                )));
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => DetailPage(
+                          article: article,
+                          backgroundColor: containerColor,
+                        ),
+                      ),
+                    );
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Container(
-                      padding: const EdgeInsets.all(14),
+                      padding: const EdgeInsets.all(18),
                       decoration: BoxDecoration(
                         color: containerColor,
-                        borderRadius: BorderRadius.circular(18),
+                        borderRadius: BorderRadius.circular(26),
                       ),
                       child: Stack(
                         children: [
@@ -106,24 +107,30 @@ class _NewsContainerState extends State<NewsContainer> {
                                   article['title'] ?? "No Title",
                                   style: const TextStyle(
                                     fontSize: 30,
+                                    fontFamily: 'Prompt',
                                     fontWeight: FontWeight.bold,
                                     overflow: TextOverflow.ellipsis,
                                   ),
-                                  maxLines: 3,
+                                  maxLines: 4,
                                 ),
-                                const SizedBox(height: 10),
-                                Text(article['publishedAt'] ?? "No Date"),
-                                const SizedBox(height: 12),
+                                const SizedBox(height: 5),
+                                Text(
+                                  article['publishedAt'] ?? "No Date",
+                                  style:
+                                      const TextStyle(fontFamily: 'Questrial'),
+                                ),
+                                const SizedBox(height: 15),
                                 AuthorWidget(
                                   author: article['author'] ?? "No Author",
                                 ),
-                                const SizedBox(height: 15),
+                                const SizedBox(height: 20),
                                 Text(
                                   article['description'] ?? "No Description",
-                                  style: const TextStyle(fontSize: 22),
+                                  style: const TextStyle(
+                                      fontSize: 22, fontFamily: 'Questrial'),
                                   textAlign: TextAlign.justify,
                                   overflow: TextOverflow.ellipsis,
-                                  maxLines: 7,
+                                  maxLines: 6,
                                 ),
                                 const SizedBox(height: 20),
                               ],

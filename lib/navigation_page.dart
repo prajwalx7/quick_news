@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quick_news/pages/Bookmark%20Page/Pages/bookmark_page.dart';
 import 'package:quick_news/pages/Home%20Page/Pages/home_page.dart';
 import 'package:quick_news/pages/Home%20Page/Widgets/custom_bottom_bar.dart';
-import 'package:quick_news/pages/Search%20Page/pages/search_page.dart';
+import 'package:quick_news/pages/Profile%20Page/pages/profile_page.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({super.key});
@@ -15,8 +15,8 @@ class _NavigationPageState extends State<NavigationPage> {
   int currentIndex = 0;
   final List<Widget> _pages = const [
     HomePage(),
-    SearchPage(),
     BookmarkPage(),
+    ProfilePage(),
   ];
 
   void _onTap(int index) {
