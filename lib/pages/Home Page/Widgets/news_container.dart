@@ -136,7 +136,7 @@ class _NewsContainerState extends State<NewsContainer> {
                               ],
                             ),
                           ),
-                          const IconsWidget(),
+                          IconsWidget(article: article),
                         ],
                       ),
                     ),

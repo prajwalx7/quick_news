@@ -93,10 +93,12 @@ class DetailPage extends StatelessWidget {
                         ),
                       )
                     : Container(),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    IconsWidget(),
+                    IconsWidget(
+                      article: article,
+                    ),
                   ],
                 ),
               ],
