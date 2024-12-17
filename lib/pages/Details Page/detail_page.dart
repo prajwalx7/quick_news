@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:quick_news/pages/Home%20Page/Widgets/author_widget.dart';
-import 'package:quick_news/pages/Home%20Page/Widgets/icons_widget.dart';
+import 'package:quick_news/widgets/icons_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailPage extends StatelessWidget {

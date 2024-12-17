@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quick_news/pages/Bookmark%20Page/Pages/bookmark_page.dart';
 import 'package:quick_news/pages/Home%20Page/Pages/home_page.dart';
-import 'package:quick_news/pages/Home%20Page/Widgets/custom_bottom_bar.dart';
+import 'package:quick_news/widgets/custom_bottom_bar.dart';
 import 'package:quick_news/pages/Profile%20Page/pages/profile_page.dart';
 
 class NavigationPage extends StatefulWidget {

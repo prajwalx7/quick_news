@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:quick_news/pages/Details%20Page/detail_page.dart';
 import 'package:quick_news/pages/Home%20Page/Widgets/author_widget.dart';
-import 'package:quick_news/pages/Home%20Page/Widgets/icons_widget.dart';
+import 'package:quick_news/widgets/icons_widget.dart';
 import 'package:quick_news/services/news_service.dart';
 
 class NewsContainer extends StatefulWidget {

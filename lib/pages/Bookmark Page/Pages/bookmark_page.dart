@@ -33,116 +33,121 @@ class _BookmarkPageState extends State<BookmarkPage> {
         centerTitle: true,
         backgroundColor: const Color(0xff0C0C0C),
       ),
-      body: bookmarkedArticles.isEmpty
-          ? const Center(
-              child: Text(
-                'No bookmarks yet!',
-                style: TextStyle(
-                    fontSize: 18, fontFamily: 'Questrial', color: Colors.white),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color(0xff393939),
+                borderRadius: BorderRadius.circular(32),
               ),
-            )
-          : ListView.builder(
-              itemCount: bookmarkedArticles.length,
-              itemBuilder: (context, index) {
-                final article = bookmarkedArticles[index];
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => DetailPage(
-                          article: article,
-                          backgroundColor: _colors[index % _colors.length],
-                        ),
+              child: TextField(
+                cursorColor: Colors.white,
+                style: const TextStyle(color: Colors.white), // Text color
+                decoration: InputDecoration(
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  hintText: "Search News",
+                  hintStyle: const TextStyle(color: Colors.white70),
+                  prefixIcon:
+                      const Icon(Iconsax.search_normal, color: Colors.white70),
+                  filled: true,
+                  fillColor: Colors.transparent,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(32),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          bookmarkedArticles.isEmpty
+              ? const Padding(
+                  padding: EdgeInsets.only(top: 250.0),
+                  child: Text(
+                    'No bookmarks yet!',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontFamily: 'Questrial',
+                        color: Colors.white),
+                  ),
+                )
+              : ListView.builder(
+                  itemCount: bookmarkedArticles.length,
+                  itemBuilder: (context, index) {
+                    final article = bookmarkedArticles[index];
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => DetailPage(
+                              article: article,
+                              backgroundColor: _colors[index % _colors.length],
+                            ),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Dismissible(
+                              key: Key(article['title']),
+                              direction: DismissDirection.endToStart,
+                              onDismissed: (direction) {
+                                Provider.of<BookmarkProvider>(context,
+                                        listen: false)
+                                    .removeBookmark(article);
+                              },
+                              background: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: const Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: 20),
+                                    child: Icon(
+                                      Icons.delete,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              child: Container(
+                                padding: const EdgeInsets.all(18),
+                                decoration: BoxDecoration(
+                                  color: _colors[index % _colors.length],
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      article['title'] ?? "No Title",
+                                      style: const TextStyle(
+                                        fontSize: 30,
+                                        fontFamily: 'Prompt',
+                                        fontWeight: FontWeight.bold,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      maxLines: 4,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     );
                   },
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 12),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: const Color(0xff393939),
-                            borderRadius: BorderRadius.circular(32),
-                          ),
-                          child: TextField(
-                            cursorColor: Colors.white,
-                            style: const TextStyle(
-                                color: Colors.white), // Text color
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 15),
-                              hintText: "Search News",
-                              hintStyle: const TextStyle(color: Colors.white70),
-                              prefixIcon: const Icon(Iconsax.search_normal,
-                                  color: Colors.white70),
-                              filled: true,
-                              fillColor: Colors.transparent,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(32),
-                                borderSide: BorderSide.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Dismissible(
-                          key: Key(article['title']),
-                          direction: DismissDirection.endToStart,
-                          onDismissed: (direction) {
-                            Provider.of<BookmarkProvider>(context,
-                                    listen: false)
-                                .removeBookmark(article);
-                          },
-                          background: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: const Align(
-                              alignment: Alignment.centerRight,
-                              child: Padding(
-                                padding: EdgeInsets.only(right: 20),
-                                child: Icon(
-                                  Icons.delete,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          child: Container(
-                            padding: const EdgeInsets.all(18),
-                            decoration: BoxDecoration(
-                              color: _colors[index % _colors.length],
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  article['title'] ?? "No Title",
-                                  style: const TextStyle(
-                                    fontSize: 30,
-                                    fontFamily: 'Prompt',
-                                    fontWeight: FontWeight.bold,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  maxLines: 4,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
+                ),
+        ],
+      ),
     );
   }
 }
