@@ -136,7 +136,11 @@ class _NewsContainerState extends State<NewsContainer> {
                               ],
                             ),
                           ),
-                          IconsWidget(article: article),
+                          Positioned(
+                            bottom: 0,
+                            right: 5,
+                            child: IconsWidget(article: article),
+                          ),
                         ],
                       ),
                     ),

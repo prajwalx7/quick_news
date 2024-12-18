@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:quick_news/pages/Home%20Page/Widgets/author_widget.dart';
 import 'package:quick_news/widgets/icons_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -38,7 +37,7 @@ class DetailPage extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     icon: const Icon(
-                      Iconsax.arrow_left,
+                      Icons.arrow_back,
                     ),
                   ),
                 ),
@@ -92,15 +91,23 @@ class DetailPage extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                       )
-                    : Container(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconsWidget(
-                      article: article,
-                    ),
-                  ],
+                    : const Text(
+                        'No image available',
+                        style: TextStyle(
+                            color: Colors.black, fontFamily: 'prompt'),
+                      ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 16.0, top: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      IconsWidget(
+                        article: article,
+                      ),
+                    ],
+                  ),
                 ),
+                const SizedBox(height: 40),
               ],
             ),
           ),

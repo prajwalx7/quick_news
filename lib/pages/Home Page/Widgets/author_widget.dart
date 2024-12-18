@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AuthorWidget extends StatelessWidget {
   final String? author;
@@ -12,14 +12,13 @@ class AuthorWidget extends StatelessWidget {
     return Row(
       children: [
         Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.black),
-            color: Colors.white,
-            shape: BoxShape.circle,
-          ),
-          child: const Icon(Iconsax.user),
-        ),
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black),
+              color: Colors.white,
+              shape: BoxShape.circle,
+            ),
+            child: SvgPicture.asset('assets/icons/user.svg')),
         const SizedBox(width: 12),
         Expanded(
           child: Column(

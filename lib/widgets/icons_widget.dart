@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:quick_news/services/bookmark_provider.dart';
 
@@ -25,50 +26,37 @@ class _IconsWidgetState extends State<IconsWidget> {
         (bookmarkedArticle) =>
             bookmarkedArticle['title'] == widget.article['title']);
 
-    return Positioned(
-      bottom: 5,
-      right: 5,
-      child: Row(
-        children: [
-          IconButton(
-            icon: isLiked
-                ? const Icon(
-                    Icons.thumb_up,
-                    color: Colors.red,
-                  )
-                : const Icon(
-                    Icons.thumb_up_alt_outlined,
-                    color: Colors.black,
-                  ),
-            onPressed: () {
-              setState(() {
-                // Toggle the like state on button tap
-                isLiked = !isLiked;
-              });
-            },
-          ),
-          const SizedBox(width: 5),
-          IconButton(
-            icon: Icon(
-              isBookmarked ? Icons.bookmark : Icons.bookmark_outline,
-            ),
-            color: isBookmarked ? Colors.red : Colors.black,
-            onPressed: () {
-              if (isBookmarked) {
-                bookmarkProvider.removeBookmark(widget.article);
-              } else {
-                bookmarkProvider.addBookmark(widget.article);
-              }
-            },
-          ),
-          const SizedBox(width: 5),
-          IconButton(
-            icon: const Icon(Icons.share),
-            color: Colors.black,
-            onPressed: () {},
-          ),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              isLiked = !isLiked;
+            });
+          },
+          child: isLiked
+              ? SvgPicture.asset('assets/icons/thumbs_up.svg')
+              : SvgPicture.asset('assets/icons/thumbs_up_outlined.svg'),
+        ),
+        const SizedBox(width: 25),
+        GestureDetector(
+          onTap: () {
+            if (isBookmarked) {
+              bookmarkProvider.removeBookmark(widget.article);
+            } else {
+              bookmarkProvider.addBookmark(widget.article);
+            }
+          },
+          child: isBookmarked
+              ? SvgPicture.asset('assets/icons/bookmark.svg')
+              : SvgPicture.asset('assets/icons/bookmark_outlined.svg'),
+        ),
+        const SizedBox(width: 25),
+        GestureDetector(
+            onTap: () {},
+            child: SvgPicture.asset('assets/icons/share_outlined.svg')),
+      ],
     );
   }
 }

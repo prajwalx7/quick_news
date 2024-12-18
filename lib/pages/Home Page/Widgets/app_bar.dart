@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});
@@ -40,7 +39,7 @@ class CustomAppBar extends StatelessWidget {
             IconButton(
               onPressed: () {},
               icon: const Icon(
-                Iconsax.notification,
+                Icons.notifications_outlined,
                 color: Colors.white,
               ),
             ),

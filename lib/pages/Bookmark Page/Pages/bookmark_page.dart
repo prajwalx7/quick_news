@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import 'package:quick_news/pages/Details%20Page/detail_page.dart';
 import 'package:quick_news/services/bookmark_provider.dart';
@@ -23,7 +22,6 @@ class _BookmarkPageState extends State<BookmarkPage> {
   @override
   void initState() {
     super.initState();
-    // Load the bookmarks when the page is initialized
     Provider.of<BookmarkProvider>(context, listen: false).loadBookmarks();
   }
 
@@ -59,8 +57,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                   hintText: "Search News",
                   hintStyle: const TextStyle(color: Colors.white70),
-                  prefixIcon:
-                      const Icon(Iconsax.search_normal, color: Colors.white70),
+                  prefixIcon: const Icon(Icons.search, color: Colors.white70),
                   filled: true,
                   fillColor: Colors.transparent,
                   border: OutlineInputBorder(
