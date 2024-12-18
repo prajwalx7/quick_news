@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import 'package:quick_news/services/bookmark_provider.dart';
 
@@ -12,24 +11,38 @@ class IconsWidget extends StatefulWidget {
 }
 
 class _IconsWidgetState extends State<IconsWidget> {
+  bool isLiked = false;
+  @override
+  void initState() {
+    super.initState();
+    isLiked = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     final bookmarkProvider = Provider.of<BookmarkProvider>(context);
-
     final isBookmarked = bookmarkProvider.bookmarkedArticles.any(
         (bookmarkedArticle) =>
             bookmarkedArticle['title'] == widget.article['title']);
-    bool isLiked = false;
+
     return Positioned(
       bottom: 5,
       right: 5,
       child: Row(
         children: [
           IconButton(
-            icon: const Icon(Iconsax.like_1),
-            color: Colors.black,
+            icon: isLiked
+                ? const Icon(
+                    Icons.thumb_up,
+                    color: Colors.red,
+                  )
+                : const Icon(
+                    Icons.thumb_up_alt_outlined,
+                    color: Colors.black,
+                  ),
             onPressed: () {
               setState(() {
+                // Toggle the like state on button tap
                 isLiked = !isLiked;
               });
             },
@@ -50,7 +63,7 @@ class _IconsWidgetState extends State<IconsWidget> {
           ),
           const SizedBox(width: 5),
           IconButton(
-            icon: const Icon(Iconsax.share),
+            icon: const Icon(Icons.share),
             color: Colors.black,
             onPressed: () {},
           ),

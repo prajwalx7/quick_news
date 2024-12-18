@@ -4,13 +4,18 @@ import 'package:quick_news/navigation_page.dart';
 import 'package:quick_news/services/bookmark_provider.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (_) => BookmarkProvider(),),
-    ],
-  
-  child: const MyApp()));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => BookmarkProvider()..loadBookmarks(),
+          /* ".." cascade notation in dart which allows call method on an object
+             immediately after creating it */
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -24,5 +29,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

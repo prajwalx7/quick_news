@@ -19,10 +19,19 @@ class _BookmarkPageState extends State<BookmarkPage> {
     Color(0xffEDE5FF),
     Color(0xffE5FFD3),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    // Load the bookmarks when the page is initialized
+    Provider.of<BookmarkProvider>(context, listen: false).loadBookmarks();
+  }
+
   @override
   Widget build(BuildContext context) {
     final bookmarkedArticles =
         Provider.of<BookmarkProvider>(context).bookmarkedArticles;
+
     return Scaffold(
       backgroundColor: const Color(0xff0C0C0C),
       appBar: AppBar(
@@ -44,7 +53,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
               ),
               child: TextField(
                 cursorColor: Colors.white,
-                style: const TextStyle(color: Colors.white), // Text color
+                style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   contentPadding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
@@ -73,78 +82,82 @@ class _BookmarkPageState extends State<BookmarkPage> {
                         color: Colors.white),
                   ),
                 )
-              : ListView.builder(
-                  itemCount: bookmarkedArticles.length,
-                  itemBuilder: (context, index) {
-                    final article = bookmarkedArticles[index];
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => DetailPage(
-                              article: article,
-                              backgroundColor: _colors[index % _colors.length],
+              : Expanded(
+                  child: ListView.builder(
+                    itemCount: bookmarkedArticles.length,
+                    itemBuilder: (context, index) {
+                      final article = bookmarkedArticles[index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => DetailPage(
+                                article: article,
+                                backgroundColor:
+                                    _colors[index % _colors.length],
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Dismissible(
-                              key: Key(article['title']),
-                              direction: DismissDirection.endToStart,
-                              onDismissed: (direction) {
-                                Provider.of<BookmarkProvider>(context,
-                                        listen: false)
-                                    .removeBookmark(article);
-                              },
-                              background: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                child: const Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(right: 20),
-                                    child: Icon(
-                                      Icons.delete,
-                                      color: Colors.white,
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Dismissible(
+                                key: Key(article['title']),
+                                direction: DismissDirection.endToStart,
+                                onDismissed: (direction) {
+                                  Provider.of<BookmarkProvider>(context,
+                                          listen: false)
+                                      .removeBookmark(article);
+                                },
+                                background: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: const Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(right: 20),
+                                      child: Icon(
+                                        Icons.delete,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              child: Container(
-                                padding: const EdgeInsets.all(18),
-                                decoration: BoxDecoration(
-                                  color: _colors[index % _colors.length],
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      article['title'] ?? "No Title",
-                                      style: const TextStyle(
-                                        fontSize: 30,
-                                        fontFamily: 'Prompt',
-                                        fontWeight: FontWeight.bold,
-                                        overflow: TextOverflow.ellipsis,
+                                child: Container(
+                                  padding: const EdgeInsets.all(18),
+                                  decoration: BoxDecoration(
+                                    color: _colors[index % _colors.length],
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        article['title'] ?? "No Title",
+                                        style: const TextStyle(
+                                          fontSize: 30,
+                                          fontFamily: 'Prompt',
+                                          fontWeight: FontWeight.bold,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        maxLines: 4,
                                       ),
-                                      maxLines: 4,
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
         ],
       ),
