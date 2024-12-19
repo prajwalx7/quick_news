@@ -5,14 +5,10 @@ import 'package:quick_news/services/bookmark_provider.dart';
 
 void main() {
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => BookmarkProvider()..loadBookmarks(),
-          /* ".." cascade notation in dart which allows call method on an object
+    ChangeNotifierProvider(
+      create: (_) => BookmarkProvider()..loadBookmarks(),
+      /* ".." cascade notation in dart which allows call method on an object
              immediately after creating it */
-        ),
-      ],
       child: const MyApp(),
     ),
   );
