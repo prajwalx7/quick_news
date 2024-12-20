@@ -12,26 +12,51 @@ class CustomBottomBar extends StatefulWidget {
   State<CustomBottomBar> createState() => _CustomBottomBarState();
 }
 
-class _CustomBottomBarState extends State<CustomBottomBar> {
+class _CustomBottomBarState extends State<CustomBottomBar>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<Offset> _slideAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 500));
+    _slideAnimation = Tween<Offset>(
+      begin: const Offset(0, 1),
+      end: const Offset(0, 0),
+    ).animate(
+        CurvedAnimation(parent: _animationController, curve: Curves.easeIn));
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 70.0),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        decoration: BoxDecoration(
-          color: const Color(0xff393939),
-          borderRadius: BorderRadius.circular(42),
-        ),
-        child: Row(
-          mainAxisAlignment:
-              MainAxisAlignment.spaceBetween, // Distribute icons evenly
-          children: [
-            buildIcon('assets/icons/home.svg', 0, widget.currentIndex),
-            buildIcon(
-                'assets/icons/bookmark_outlined.svg', 1, widget.currentIndex),
-            buildIcon('assets/icons/user.svg', 2, widget.currentIndex),
-          ],
+      child: SlideTransition(
+        position: _slideAnimation,
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 4),
+          decoration: BoxDecoration(
+            color: const Color(0xff393939),
+            borderRadius: BorderRadius.circular(42),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              buildIcon('assets/icons/home.svg', 0, widget.currentIndex),
+              buildIcon(
+                  'assets/icons/bookmark_outlined.svg', 1, widget.currentIndex),
+              buildIcon('assets/icons/user.svg', 2, widget.currentIndex),
+            ],
+          ),
         ),
       ),
     );
@@ -40,8 +65,10 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
   Widget buildIcon(String svgPath, int index, int currentIndex) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
-      child: Container(
-        padding: const EdgeInsets.all(10),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeIn,
+        padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: index == currentIndex
               ? const Color(0xffffffff)
@@ -55,8 +82,8 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
             colorFilter: ColorFilter.mode(
                 index == currentIndex ? Colors.black : Colors.white,
                 BlendMode.srcIn),
-            height: 30,
-            width: 30,
+            height: 25,
+            width: 25,
           ),
         ),
       ),

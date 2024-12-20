@@ -36,7 +36,11 @@ class _IconsWidgetState extends State<IconsWidget> {
             });
           },
           child: isLiked
-              ? SvgPicture.asset('assets/icons/thumbs_up.svg')
+              ? SvgPicture.asset(
+                  'assets/icons/thumbs_up.svg',
+                  colorFilter:
+                      const ColorFilter.mode(Colors.red, BlendMode.srcIn),
+                )
               : SvgPicture.asset('assets/icons/thumbs_up_outlined.svg'),
         ),
         const SizedBox(width: 25),
