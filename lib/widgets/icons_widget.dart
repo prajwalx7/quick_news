@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:quick_news/services/bookmark_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class IconsWidget extends StatefulWidget {
   final Map<String, dynamic> article;
@@ -17,6 +18,19 @@ class _IconsWidgetState extends State<IconsWidget> {
   void initState() {
     super.initState();
     isLiked = false;
+  }
+
+  void _shareArticle(BuildContext context) {
+    final title = widget.article['title'] ?? 'No title';
+    final description = widget.article['description'] ?? 'No description';
+    final url = widget.article['url'] ?? 'No url';
+
+    final shareContent = 'Check out this news: \n\n'
+        'Headline: $title\n\n'
+        'Description: $description\n\n'
+        'Read more: $url';
+
+    Share.share(shareContent);
   }
 
   @override
@@ -58,7 +72,9 @@ class _IconsWidgetState extends State<IconsWidget> {
         ),
         const SizedBox(width: 25),
         GestureDetector(
-            onTap: () {},
+            onTap: () {
+              _shareArticle(context);
+            },
             child: SvgPicture.asset('assets/icons/share_outlined.svg')),
       ],
     );

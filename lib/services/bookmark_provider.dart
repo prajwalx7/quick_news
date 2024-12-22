@@ -15,8 +15,6 @@ class BookmarkProvider extends ChangeNotifier {
       _bookmarkedArticles.clear();
       _bookmarkedArticles
           .addAll(List<Map<String, dynamic>>.from(jsonDecode(savedBookmarks)));
-      print(
-          "Bookmarks loaded: $_bookmarkedArticles"); 
       notifyListeners();
     }
   }
