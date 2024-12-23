@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quick_news/pages/Bookmark%20Page/Pages/bookmark_page.dart';
 import 'package:quick_news/pages/Home%20Page/Pages/home_page.dart';
 import 'package:quick_news/pages/Profile%20Page/profile_page.dart';
@@ -29,16 +30,17 @@ class _NavigationPageState extends State<NavigationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff0C0C0C),
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           _pages[currentIndex],
           Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 10.0),
-                child:
-                    CustomBottomBar(currentIndex: currentIndex, onTap: _onTap),
-              )),
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 10.0.h),
+              child: CustomBottomBar(currentIndex: currentIndex, onTap: _onTap),
+            ),
+          ),
         ],
       ),
     );

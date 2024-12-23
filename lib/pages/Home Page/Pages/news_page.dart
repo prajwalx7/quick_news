@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quick_news/pages/Home%20Page/Widgets/news_container.dart';
 
 class NewsPage extends StatefulWidget {
@@ -43,14 +44,14 @@ class _NewsPageState extends State<NewsPage> {
               return GestureDetector(
                 onTap: () => _onFilterSelected(filter),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 12.0, vertical: 12.0),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 12.0.w, vertical: 12.0.h),
                   child: Text(
                     filter,
                     style: TextStyle(
                         color: isSelected ? Colors.white : Colors.white30,
                         fontFamily: 'Prompt',
-                        fontSize: 22,
+                        fontSize: 22.sp,
                         fontWeight:
                             isSelected ? FontWeight.bold : FontWeight.normal),
                   ),
@@ -60,7 +61,6 @@ class _NewsPageState extends State<NewsPage> {
           ),
         ),
 
-        // News Container
         NewsContainer(category: _getCategoryFromFilter(selectedCategory)),
       ],
     );

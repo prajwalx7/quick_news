@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AuthorWidget extends StatelessWidget {
@@ -12,14 +13,14 @@ class AuthorWidget extends StatelessWidget {
     return Row(
       children: [
         Container(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(8.r),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.black),
               color: Colors.white,
               shape: BoxShape.circle,
             ),
             child: SvgPicture.asset('assets/icons/user.svg')),
-        const SizedBox(width: 12),
+        SizedBox(width: 12.w),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,8 +31,8 @@ class AuthorWidget extends StatelessWidget {
               ),
               Text(
                 displayAuthor,
-                style: const TextStyle(
-                    fontSize: 18,
+                style: TextStyle(
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Prompt'),
                 overflow: TextOverflow.ellipsis,
@@ -41,16 +42,16 @@ class AuthorWidget extends StatelessWidget {
           ),
         ),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
           decoration: BoxDecoration(
             color: Colors.black,
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(18.r),
           ),
-          child: const Text(
+          child: Text(
             'Follow',
             style: TextStyle(
                 color: Colors.white,
-                fontSize: 16,
+                fontSize: 16.sp,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Prompt'),
           ),

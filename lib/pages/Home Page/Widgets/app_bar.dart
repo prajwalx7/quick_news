@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});
@@ -6,28 +7,28 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: EdgeInsets.symmetric(horizontal: 10.w),
       child: Container(
         decoration: const BoxDecoration(
           color: Color(0xff0C0C0C),
         ),
         child: Row(
           children: [
-            const Text.rich(
+            Text.rich(
               TextSpan(
                 children: [
                   TextSpan(
                     text: "Q",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 38,
+                        fontSize: 38.sp,
                         fontFamily: 'Prompt',
                         color: Colors.white),
                   ),
                   TextSpan(
                     text: "News",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       color: Colors.white,
                       fontFamily: 'Prompt',
                     ),

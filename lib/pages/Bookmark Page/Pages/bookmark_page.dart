@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:quick_news/pages/Bookmark%20Page/widgets/animated_list.dart';
 import 'package:quick_news/services/bookmark_provider.dart';
@@ -25,6 +26,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
     final bookmarkedArticles =
         Provider.of<BookmarkProvider>(context).bookmarkedArticles;
 
+    // Filter the bookmarked articles based on the search query
     final filteredBookmarkedArticles = bookmarkedArticles
         .where((article) =>
             article['title'] != null &&
@@ -44,11 +46,11 @@ class _BookmarkPageState extends State<BookmarkPage> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+            padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 12.h),
             child: Container(
               decoration: BoxDecoration(
                 color: const Color(0xff393939),
-                borderRadius: BorderRadius.circular(32),
+                borderRadius: BorderRadius.circular(32.r),
               ),
               child: TextField(
                 controller: _searchController,
@@ -59,14 +61,14 @@ class _BookmarkPageState extends State<BookmarkPage> {
                 }),
                 decoration: InputDecoration(
                   contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
                   hintText: "Search News",
                   hintStyle: const TextStyle(color: Colors.white70),
                   prefixIcon: const Icon(Icons.search, color: Colors.white70),
                   filled: true,
                   fillColor: Colors.transparent,
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(32),
+                    borderRadius: BorderRadius.circular(32.r),
                     borderSide: BorderSide.none,
                   ),
                 ),
@@ -74,17 +76,22 @@ class _BookmarkPageState extends State<BookmarkPage> {
             ),
           ),
           filteredBookmarkedArticles.isEmpty
-              ? const Padding(
-                  padding: EdgeInsets.only(top: 250.0),
+              ? Padding(
+                  padding: EdgeInsets.only(top: 250.0.h),
                   child: Text(
                     'No bookmarks yet!',
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontFamily: 'Questrial',
                         color: Colors.white),
                   ),
                 )
-              : CustomAnimatedList()
+              : Expanded(
+                  child: CustomAnimatedList(
+                    articles: filteredBookmarkedArticles,
+                    searchQuery: _searchQuery,
+                  ),
+                ),
         ],
       ),
     );

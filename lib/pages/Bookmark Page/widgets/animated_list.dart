@@ -1,12 +1,13 @@
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quick_news/pages/Bookmark%20Page/widgets/bookmark_container.dart';
 import 'package:quick_news/pages/Details%20Page/detail_page.dart';
-import 'package:quick_news/services/bookmark_provider.dart';
 
 class CustomAnimatedList extends StatefulWidget {
-  const CustomAnimatedList({super.key});
+  final List<dynamic> articles;
+  const CustomAnimatedList(
+      {super.key, required this.articles, required String searchQuery});
 
   @override
   State<CustomAnimatedList> createState() => _CustomAnimatedListState();
@@ -14,7 +15,6 @@ class CustomAnimatedList extends StatefulWidget {
 
 class _CustomAnimatedListState extends State<CustomAnimatedList> {
   final ScrollController _scrollController = ScrollController();
-  final String _searchQuery = '';
   final List<Color> colors = const [
     Color(0xffFFE8E5),
     Color(0xffFFF2C5),
@@ -26,26 +26,20 @@ class _CustomAnimatedListState extends State<CustomAnimatedList> {
   final List<bool> isAnimated = [];
   @override
   Widget build(BuildContext context) {
-    final bookmarkedArticles =
-        Provider.of<BookmarkProvider>(context).bookmarkedArticles;
-
-    final filteredBookmarkedArticles = bookmarkedArticles
-        .where((article) =>
-            article['title'] != null &&
-            article['title'].toLowerCase().contains(_searchQuery.toLowerCase()))
-        .toList();
+    final filteredBookmarkedArticles = widget.articles;
 
     if (isAnimated.length != filteredBookmarkedArticles.length) {
       isAnimated.clear();
       isAnimated.addAll(
           List.generate(filteredBookmarkedArticles.length, (index) => false));
     }
+
     return Expanded(
       child: FadingEdgeScrollView.fromScrollView(
         gradientFractionOnStart: 0.05,
         gradientFractionOnEnd: 0.2,
         child: ListView.builder(
-          padding: const EdgeInsets.only(bottom: 80),
+          padding: EdgeInsets.only(bottom: 80.h),
           controller: _scrollController,
           itemCount: filteredBookmarkedArticles.length,
           itemBuilder: (context, index) {

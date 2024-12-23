@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quick_news/pages/Home%20Page/Widgets/author_widget.dart';
 import 'package:quick_news/widgets/icons_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -82,7 +83,7 @@ class _DetailPageState extends State<DetailPage>
       backgroundColor: widget.backgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(16.0.r),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,20 +101,20 @@ class _DetailPageState extends State<DetailPage>
                   ),
                   _animations[0],
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: 30.h),
                 buildAnimatedChild(
                   Text(
                     widget.article['title'] ?? "Not available",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                       fontFamily: 'Prompt',
-                      fontSize: 32,
+                      fontSize: 32.sp,
                     ),
                   ),
                   _animations[1],
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: 10.h),
                 buildAnimatedChild(
                   Text(
                     widget.article['publishedAt'],
@@ -124,19 +125,19 @@ class _DetailPageState extends State<DetailPage>
                   ),
                   _animations[2],
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h),
                 buildAnimatedChild(
                   AuthorWidget(
                     author: widget.article['author'] ?? "Not available",
                   ),
                   _animations[3],
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: 30.h),
                 buildAnimatedChild(
                   Text(
                     widget.article['description'] ?? "not available.",
-                    style: const TextStyle(
-                      fontSize: 22,
+                    style: TextStyle(
+                      fontSize: 22.sp,
                       color: Colors.black,
                       fontFamily: 'Questrial',
                     ),
@@ -148,10 +149,10 @@ class _DetailPageState extends State<DetailPage>
                     alignment: Alignment.bottomCenter,
                     child: TextButton(
                       onPressed: () => _launchUrl(widget.article['url']),
-                      child: const Text(
+                      child: Text(
                         'Read Full Article',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           color: Colors.blue,
                           fontFamily: 'Questrial',
                           decoration: TextDecoration.underline,
@@ -164,7 +165,7 @@ class _DetailPageState extends State<DetailPage>
                 buildAnimatedChild(
                   widget.article['urlToImage'] != null
                       ? ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12.r),
                           child: Image.network(
                             widget.article['urlToImage'],
                             fit: BoxFit.cover,
@@ -181,7 +182,7 @@ class _DetailPageState extends State<DetailPage>
                 ),
                 buildAnimatedChild(
                   Padding(
-                    padding: const EdgeInsets.only(right: 16.0, top: 20),
+                    padding:  EdgeInsets.only(right: 16.0.w, top: 20.h),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -191,7 +192,7 @@ class _DetailPageState extends State<DetailPage>
                   ),
                   _animations[7],
                 ),
-                const SizedBox(height: 40),
+                SizedBox(height: 40.h),
               ],
             ),
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quick_news/pages/Details%20Page/detail_page.dart';
 import 'package:quick_news/pages/Home%20Page/Widgets/author_widget.dart';
 import 'package:quick_news/widgets/icons_widget.dart';
@@ -48,7 +49,7 @@ class _NewsContainerState extends State<NewsContainer> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 550,
+      height: 500.h,
       child: FutureBuilder<List<dynamic>>(
         future: _newsArticles,
         builder: (context, snapshot) {
@@ -89,12 +90,12 @@ class _NewsContainerState extends State<NewsContainer> {
                     );
                   },
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: EdgeInsets.symmetric(horizontal: 8.0.w),
                     child: Container(
-                      padding: const EdgeInsets.all(18),
+                      padding: EdgeInsets.all(18.r),
                       decoration: BoxDecoration(
                         color: containerColor,
-                        borderRadius: BorderRadius.circular(26),
+                        borderRadius: BorderRadius.circular(26.r),
                       ),
                       child: Stack(
                         children: [
@@ -105,40 +106,42 @@ class _NewsContainerState extends State<NewsContainer> {
                               children: [
                                 Text(
                                   article['title'] ?? "No Title",
-                                  style: const TextStyle(
-                                    fontSize: 30,
+                                  style: TextStyle(
+                                    fontSize: 30.sp,
                                     fontFamily: 'Prompt',
                                     fontWeight: FontWeight.bold,
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   maxLines: 4,
                                 ),
-                                const SizedBox(height: 5),
+                                SizedBox(height: 5.h),
                                 Text(
                                   article['publishedAt'] ?? "No Date",
                                   style:
                                       const TextStyle(fontFamily: 'Questrial'),
                                 ),
-                                const SizedBox(height: 15),
+                                SizedBox(height: 15.h),
                                 AuthorWidget(
                                   author: article['author'] ?? "No Author",
                                 ),
-                                const SizedBox(height: 20),
+                                SizedBox(height: 20.h),
                                 Text(
                                   article['description'] ?? "No Description",
-                                  style: const TextStyle(
-                                      fontSize: 22, fontFamily: 'Questrial'),
+                                  style: TextStyle(
+                                    fontSize: 22.sp,
+                                    fontFamily: 'Questrial',
+                                  ),
                                   textAlign: TextAlign.justify,
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 6,
                                 ),
-                                const SizedBox(height: 20),
+                                SizedBox(height: 20.h),
                               ],
                             ),
                           ),
                           Positioned(
                             bottom: 0,
-                            right: 5,
+                            right: 5.w,
                             child: IconsWidget(article: article),
                           ),
                         ],
